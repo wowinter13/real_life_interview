@@ -4,11 +4,15 @@
 
 **Why do we need transaction when getting data from database?**
 
+**Кому принадлежат методы объекта класса**
+
+*Они принадлежат все равно классу, потому что хранятся в его структуре.*
+
 **What is AREL?**
 
 Shortly: *A RELational algebra*
 
-Description: 
+Description:
 *Arel is a Relational Algebra for Ruby. It simplifies the generation complex of SQL queries.
 Now is bundled inside Rails Active Record.
 for use in constructing SQL queries. Every time you pass a hash to where, it goes through Arel eventually. Rails exposes this with a public API that we can hook into when we need to build a more complex query.
@@ -27,6 +31,18 @@ It’s all about providing frameworks with a way of building and representing SQ
 ## Practical questions
 
 **What is the difference between :include and :extend in Ruby?**
+
+**What is the difference between Proc and lambda?**
+
+
+**Типы данных в Ruby**
+- Nil/True/False class
+- Numeric (integer/float/complex)
+- Time/Date
+- String
+- Array/Hash/Range
+- Struct
+
 
 **What is Mixin?**
 
@@ -51,10 +67,6 @@ It’s all about providing frameworks with a way of building and representing SQ
     return n * rec_fact(n-1)
   end
   ```
-
-**Кому принадлежат методы объекта класса**
-
-*Они принадлежат все равно классу, потому что хранятся в его структуре.*
 
 **Cвязность и что это означает**
 
