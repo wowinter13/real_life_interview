@@ -1,26 +1,34 @@
 # Interview
 
+***
 ## DB Questions
 
 **What is AREL?**
 
 Shortly: *A RELational algebra*
 
-Description:
+Fully:
 *Arel is a Relational Algebra for Ruby. It simplifies the generation complex of SQL queries.
+
 Now is bundled inside Rails Active Record.
-for use in constructing SQL queries. Every time you pass a hash to where, it goes through Arel eventually. Rails exposes this with a public API that we can hook into when we need to build a more complex query.
+
+Being used in constructing SQL queries. Every time you pass a hash to where, it goes through Arel eventually. Rails exposes this with a public API that we can hook into when we need to build a more complex query.
+
 It’s all about providing frameworks with a way of building and representing SQL queries. It’s not the kind of library you would typically want to use directly (although you could as shown in a minute). Arel is meant to be the basic building block upon which frameworks build their own APIs that are more suitable for the end user.*
 
 **What is N+1 query?**
 
-**Базовые SQL Операторы**
+*The N+1 query is a query, when we do a one more query for a child-record each time iterating throught parent-records.*
+
+*The main problem is a reduced performance.*
+
+**Basic SQL Clauses**
 - HAVING
 - GROUP
 
 **Join types:**
 
-**Why do we need transaction when getting data from database?**
+**Why do we need a transaction when getting data from the database?**
 
 **Что такое индекс, когда добавляют в базу и зачем они нужны**
 
@@ -29,6 +37,8 @@ It’s all about providing frameworks with a way of building and representing SQ
 *Индексы влияют на скорость апдейта и инсерта, потому что при каждом изменение таблицы нужно перестраивать индекс.*
 
 **Как устроен btree и как функция защищает от коллизий**
+
+***
 
 ## Theoretical questions
 
@@ -39,20 +49,60 @@ It’s all about providing frameworks with a way of building and representing SQ
 **3 принципа ООП:**
 - Как инкапсуляция работает в Ruby
 
-**5 принципов SOLID:**
-- S
-- O
-- L
-- I
-- D
+**5 principles SOLID:**
+*SOLID is an acronym for 5 basic OOP principles based on making the code more understandable, flexible and maintainable.*
+
+- S(ingle resposibility)
+- O(pen-closed)
+- L(iskov substitution)
+- I(nterface segregation)
+- D(ependency inversion)
 
 **Cвязность и что это означает**
 
 *Классы должны как можно меньше знать друг о друге.*
 
+**[Low-Level] How many times Ruby reads & updates the code before running?**
+
+Shortly: *3 times.*
+
+*Ruby code ->*
+
+**Tokenize:** *reads the text chars and converts them into tokens ->(tokens)*
+
+```ruby
+10.times do |n|
+# tINTEGER . tIDENTIFIER keyword_do | tIDENTIFIER | 
+```
+
+**Parse:** *using Bison (yet-another-compiler-compiler) parses tokens into statements called abstract syntax tree nodes (also includes a meta-data: line numbers, compiler intermediates) ->(AST nodes)*
+
+*Actually Bison doesn't process tokens, it just creates a parsing code file `/parse.c` from a rules file `/parse.y` during the build process.*
+
+*And after that using Grammar Rules described in `parse.c` we convert tokens into a complex internal data structure called AST.
+
+```Ruby
+Program # 10.times { |n| puts n }
+   |
+ method
+:add_block
+   |
+  call
+  ---------------------
+   |        |         |
+integer    period  identifier
+  10        .        times
+```
+
+**Compile:** *compiles AST nodes into low-level instructions->
+YARV(yet-another-ruby-vm) Instructions*
+
+***
+
 ## Practical questions
 
 **What is the difference between :include and :extend in Ruby?**
+*:include is being used for instance methods (i for I) and :extend for class methods.*
 
 **What is the difference between Proc and lambda?**
 
@@ -67,30 +117,30 @@ It’s all about providing frameworks with a way of building and representing SQ
 
 **What is Mixin?**
 
-**Множественное наследование в Ruby**
+**Multiple inheritance in Ruby**
 
 **Самый известный пример метапрограммирования в Ruby**
 
 *attr_accessor, attr_reader, attr_writer*
 
-**Что такое unit тесты**
+**What is a unit test? And when do we use it?**
 
 **Где хранить бизнес логику(толстые модели/толстые контроллеры)**
 
 *В сервисах или интеракторах/оперейшенах.*
 
-**Базовые Ruby/Rails паттерны:**
+**Basic Ruby/Rails patterns:**
 - Interactor
 - FormObject
 - ServiceObject
 
-**Что такое MVC**
+**What is MVC**
 
 ## Interview-coding
 
 **Варианты реализации факториала:**
 
-- классический
+- classic
   ```ruby
   def fact(n)
     return 1 if n.zero?
@@ -98,7 +148,7 @@ It’s all about providing frameworks with a way of building and representing SQ
     (1..n).inject(:*)
   end
   ```
-- рекурсивный
+- recursion
   ```ruby
   def rec_fact(n)
     return 1 if n.zero?
@@ -113,3 +163,5 @@ It’s all about providing frameworks with a way of building and representing SQ
 What is the difference between `let`, `const`, `var` in JS.
 
 Как реализован ООП в классическом JS.
+
+In cookie-based session management, who sets the session token?
