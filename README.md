@@ -8,6 +8,7 @@
 Shortly: *A RELational algebra*
 
 Fully:
+
 *Arel is a Relational Algebra for Ruby. It simplifies the generation complex of SQL queries.
 
 Now is bundled inside Rails Active Record.
@@ -50,6 +51,7 @@ It’s all about providing frameworks with a way of building and representing SQ
 - Как инкапсуляция работает в Ruby
 
 **5 principles SOLID:**
+
 *SOLID is an acronym for 5 basic OOP principles based on making the code more understandable, flexible and maintainable.*
 
 - S(ingle resposibility)
@@ -79,7 +81,7 @@ Shortly: *3 times.*
 
 *Actually Bison doesn't process tokens, it just creates a parsing code file `/parse.c` from a rules file `/parse.y` during the build process.*
 
-*And after that using Grammar Rules described in `parse.c` we convert tokens into a complex internal data structure called AST.
+*And after that using Grammar Rules described in `parse.c` we convert tokens into a complex internal data structure called AST.*
 
 ```Ruby
 Program # 10.times { |n| puts n }
@@ -97,6 +99,16 @@ integer    period  identifier
 **Compile:** *compiles AST nodes into low-level instructions->
 YARV(yet-another-ruby-vm) Instructions*
 
+```ruby
+2+2
+# [AST Node]                                [YARV]
+# NODE_SCOPE (table: [none], args: [none]) | putself
+# |--NODE_FCALL (method id: puts)          | <callinfo mid:puts
+#     |--NODE_CALL (method id: +)          | <callinfo mid:+
+#         |--NODE_LIT 2                    | putobject 2
+#         |--NODE_LIT 2                    | putobject 2
+```
+
 ***
 
 ## Practical questions
@@ -104,7 +116,7 @@ YARV(yet-another-ruby-vm) Instructions*
 **What is the difference between :include and :extend in Ruby?**
 *:include is being used for instance methods (i for I) and :extend for class methods.*
 
-**What is the difference between Proc and lambda?**
+**What is the difference between Proc and Lambda?**
 
 **Типы данных в Ruby**
 - Nil/True/False class
@@ -119,11 +131,11 @@ YARV(yet-another-ruby-vm) Instructions*
 
 **Multiple inheritance in Ruby**
 
-**Самый известный пример метапрограммирования в Ruby**
+**The most known/used metaprogramming example in Ruby**
 
 *attr_accessor, attr_reader, attr_writer*
 
-**What is a unit test? And when do we use it?**
+**What are unit tests? And when do we use them?**
 
 **Где хранить бизнес логику(толстые модели/толстые контроллеры)**
 
