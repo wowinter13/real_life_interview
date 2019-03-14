@@ -66,6 +66,8 @@ It’s all about providing frameworks with a way of building and representing SQ
 
 **[Low-Level] How many times Ruby reads & updates the code before running?**
 
+* God, save "Metaprogramming Ruby"
+
 Shortly: *3 times.*
 
 *Ruby code ->*
@@ -107,6 +109,22 @@ YARV(yet-another-ruby-vm) Instructions*
 #     |--NODE_CALL (method id: +)          | <callinfo mid:+
 #         |--NODE_LIT 2                    | putobject 2
 #         |--NODE_LIT 2                    | putobject 2
+```
+
+**[Low-level] What is method dispatch?**
+
+*In case of languages with a single inheritance (like Ruby), method dispatch is the way language looks for the method definition. If the method is defined on that class, that method is invoked. Else the language will lookup for this definition through class ancestors up to the unique supercall.*
+
+```ruby
+# read from the bottom
+BasicObject # or finally here
+|
+Kernel # or here
+|
+Object # if was not overwrited, will check here
+  |
+  |----ExampleClass #lookup if method was overwrited
+
 ```
 
 ***
