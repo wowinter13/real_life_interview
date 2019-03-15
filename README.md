@@ -136,14 +136,13 @@ Object # if was not overwrited, will check here
 
 **What is the difference between Proc and Lambda?**
 
-**Типы данных в Ruby**
+**Ruby data types**
 - Nil/True/False class
 - Numeric (integer/float/complex)
 - Time/Date
 - String
 - Array/Hash/Range
 - Struct
-
 
 **What is Mixin?**
 
@@ -155,9 +154,9 @@ Object # if was not overwrited, will check here
 
 **What are unit tests? And when do we use them?**
 
-**Где хранить бизнес логику(толстые модели/толстые контроллеры)**
+**Where should we store the business logic?(fat models/fat controllers)**
 
-*В сервисах или интеракторах/оперейшенах.*
+*Better to use some basic patterns like: interactors,services or operations, and to store it here.*
 
 **Basic Ruby/Rails patterns:**
 - Interactor
@@ -168,7 +167,7 @@ Object # if was not overwrited, will check here
 
 ## Interview-coding
 
-**Варианты реализации факториала:**
+**Implementations of :factorial function:**
 
 - classic
   ```ruby
@@ -187,11 +186,12 @@ Object # if was not overwrited, will check here
   end
   ```
 
+**Given an integer `c`, return `true` if there exist 2 integers, a and b, such that `a * a + b * b =c`**
 
-**Some JS:**
+## Some JS
 
-What is the difference between `let`, `const`, `var` in JS.
+**What is the difference between `let`, `const`, `var` in JS.**
 
-Как реализован ООП в классическом JS.
+**How OOP is implemented in vanilla JS.**
 
-In cookie-based session management, who sets the session token?
+**In cookie-based session management, who sets the session token?**
