@@ -39,6 +39,12 @@ It’s all about providing frameworks with a way of building and representing SQ
 
 **Как устроен btree и как функция защищает от коллизий**
 
+
+**What is pgBouncer? When should we use it?**
+
+**Postgres replication (like: master-slave)**
+
+**What is PGQ? Other queues in Postgres?**
 ***
 
 ## Theoretical questions
