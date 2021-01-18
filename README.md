@@ -1,7 +1,24 @@
-# Interview
+# Questions
 
 ***
-## DB Questions
+
+
+## Common
+
+**Why gRPC is better than our lovely REST? Why gRPC is a perfect choice for microservices? Do you know any useful features?**
+
+gRPC is a perfect choice for microservices simply because of being lightweight and fast. Talking about the advantages:
+1. Metadata. Instead of using HTTP requests. Metadata is much simplier and perfectly fits for internal communication.
+2. Streaming (thanks to HTTP 2.0). gRPC provides all streaming types (client, server, bidirectional).
+3. Interceptors. The way gRPC allows you to modify and change requests/responses right out of the box. (read: middlewares)
+4. Load Balancing.
+5. Call Cancellation. You can simply kill a gRPC call if you don't need a response anymore.
+
+## Golang
+
+
+## Ruby/RoR
+### DB Questions
 
 **What is AREL?**
 
@@ -81,7 +98,7 @@ The main problem is a reduced performance.
 
 ***
 
-## Theoretical questions
+### Theoretical questions
 
 **Кому принадлежат методы объекта класса**
 
@@ -171,7 +188,7 @@ Object # if was not overwrited, will check here
 
 ***
 
-## Practical questions
+### Practical questions
 
 **method_missing: what is it?**
 
