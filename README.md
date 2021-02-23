@@ -5,7 +5,6 @@
 
 ## Common
 
-
 **Threads vs Processes**
 
 <img width="560" height="544" src="https://raw.githubusercontent.com/wowinter13/real_life_interview/master/thread-vs-process.png">
@@ -29,6 +28,10 @@ gRPC is a perfect choice for microservices simply because of being lightweight a
 5. Call Cancellation. You can simply kill a gRPC call if you don't need a response anymore.
 
 ## Golang
+
+
+
+****
 
 
 ## Ruby/RoR
@@ -278,6 +281,64 @@ Nginx - веб-сервер. Puma или Unicorn - application-сервер.
 Редирект.
 
 **Как работает loadbalancer**
+
+
+### Metaprogramming
+
+**What is Ruby's :method_missing?**
+
+:method_missing is defined in `BasicObject`. It allows us to:
+  1. Handle errors
+  2. Delegate methods
+  3. Build DSLs
+
+When an object calls a method, Ruby traverses a method lookup path through object's ancestors.
+
+To pass control to the original `method_missing` we may use `super`. Also, it's a good practice always to override `respond_to_missing?` method.
+
+**First**. It allows us to handle errors in a friendlier way.
+
+```ruby
+class CustomClass
+
+  def method_missing(method_name, *args)
+    message = "Custom message"
+    raise NoMethodError, message
+  end
+end
+```
+
+**Second**. It allows us to call or/and delegate methods.
+
+```ruby
+class Number
+  attr_accessor :value
+
+  def initialize
+    @value = 0
+  end
+
+  def method_missing(method_name, *args, &block)
+    if method_name ~= /add_(.*)/
+      public_send("#{Regexp.last_match(1)}=", *args)
+    else
+      super
+    end
+  end
+
+  def respond_to_missing(method_name, include_private = false)
+   method_name ~= /add_(.*)/ || super
+  end
+end
+
+num = Number.new
+num.add_value(1) # increment
+num # => 1
+num.respond_to?(:add_value) # => true
+```
+
+
+**Third**. It allows us to create DSLs (*domain-specific language*). Check any of the most popular gems: Rack, XML, Rails Routing, Sinatra, factory_bot, interactors. In all of them you would be able to find some footprints of `method_missing` and other metaprogramming tweaks.
 
 ## Patterns
 
