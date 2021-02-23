@@ -5,6 +5,20 @@
 
 ## Common
 
+
+**Threads vs Processes**
+
+<img width="560" height="544" src="https://raw.githubusercontent.com/wowinter13/real_life_interview/master/thread-vs-process.png">
+
+**Data races**
+
+A data race is a situation that occurs when multiple threads are running the same program and 2 or more threads get access to the same shared variable, at the same time. Cases like this can be prevented using locks, so the access to the variable will be locked until one of the threads completes its operation.
+
+**Deadlocks**
+
+This is a situation where two or more threads are blocked permamently because they are waiting for each other.
+
+
 **Why gRPC is better than our lovely REST? Why gRPC is a perfect choice for microservices? Do you know any useful features?**
 
 gRPC is a perfect choice for microservices simply because of being lightweight and fast. Talking about the advantages:
