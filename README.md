@@ -1,7 +1,13 @@
-# Questions
+# Technical Interview Cheat Sheet
+
+A collection of questions from different technical interviews.
 
 ***
 
+
+# Table of Content
+- [Ruby/Rails]
+- [Golang]
 
 ## Common
 
@@ -284,6 +290,8 @@ Nginx - веб-сервер. Puma или Unicorn - application-сервер.
 
 
 ### Metaprogramming
+
+**Kernel.eval, .class_eval – code generators**
 
 **What is Ruby's :method_missing?**
 
