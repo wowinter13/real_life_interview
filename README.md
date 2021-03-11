@@ -4,12 +4,26 @@ A collection of questions from different technical interviews.
 
 ***
 
+## Contributing
+This is an open source, community project, and I am grateful for all the help I can get. If you find a mistake make a PR and please have a source so I can confirm the correction. If you have any suggestions feel free to open an issue.
+
+***
 
 # Table of Content
-- [Ruby/Rails]
-- [Golang]
+- [Common](#common)
+- [Databases](#databases)
+  - [Postgresql](#postgresql)
+- [Ruby on Rails](#ror)
+  - [Ruby](#ruby)
+  - [Rails](#rails)
+  - [Metaprogramming](#metaprogramming)
+- [Golang](#golang)
+- [Javascript](#javascript)
 
-## Common
+
+***
+
+# <a id="common"></a> Common
 
 **Threads vs Processes**
 
@@ -33,14 +47,14 @@ gRPC is a perfect choice for microservices simply because of being lightweight a
 4. Load Balancing.
 5. Call Cancellation. You can simply kill a gRPC call if you don't need a response anymore.
 
-## Golang
+***
 
+# <a id="databases"></a> Databases
+### <a id="postgresql"></a> Postgresql
 
+***
 
-****
-
-
-## Ruby/RoR
+# <a id="ror"></a> Ruby on Rails
 ### DB Questions
 
 **What is AREL?**
@@ -404,10 +418,16 @@ num.respond_to?(:add_value) # => true
 
 **Given an integer `c`, return `true` if there exist 2 integers, a and b, such that `a * a + b * b =c`**
 
-## Some JS
+***
 
-**What is the difference between `let`, `const`, `var` in JS.**
+# <a id="golang"></a> Golang
 
-**How OOP is implemented in vanilla JS.**
 
-**In cookie-based session management, who sets the session token?**
+***
+# <a id="javascript"></a> Javascript
+
+#### What is the difference between `let`, `const` and `var` in JS.
+
+#### How does OOP implemented in vanilla JS?
+
+#### In cookie-based session management, who sets the session token?
