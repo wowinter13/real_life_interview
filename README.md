@@ -11,15 +11,19 @@ This is an open source, community project, and I am grateful for all the help I 
 
 # Table of Content
 - [Common](#common)
+  - [Algorithms](#algorithms)
+  - [Concurrency and Parallelism](#concurrency-and-parallelism)
 - [Databases](#databases)
   - [Postgresql](#postgresql)
 - [Ruby on Rails](#ror)
   - [Ruby](#ruby)
   - [Rails](#rails)
   - [Metaprogramming](#metaprogramming)
+  - [Concurrency and Parallelism](#concurrency-and-parallelism)
+  - [Ancient Magic](#ancient-magic)
 - [Golang](#golang)
+    - [Concurrency and Parallelism](#concurrency-and-parallelism)
 - [Javascript](#javascript)
-
 
 ***
 
@@ -51,6 +55,8 @@ gRPC is a perfect choice for microservices simply because of being lightweight a
 
 # <a id="databases"></a> Databases
 ### <a id="postgresql"></a> Postgresql
+
+#### Do you know what is PGQ? Other queues in Postgres?
 
 ***
 
@@ -118,10 +124,6 @@ The main problem is a reduced performance.
 **Postgres replication (like: master-slave)**
 
 
-**What is PGQ? Other queues in Postgres?**
-
-
-
 **Базовые уровни изоляции транзакций**
 
 - `Read Commited`
@@ -160,79 +162,10 @@ The main problem is a reduced performance.
 
 *Классы должны как можно меньше знать друг о друге.*
 
-**[Low-Level] How many times Ruby reads & updates the code before running?**
-
-* God, save "Metaprogramming Ruby"
-
-Shortly: *3 times.*
-
-*Ruby code ->*
-
-**Tokenize:** *reads the text chars and converts them into tokens ->(tokens)*
-
-```ruby
-10.times do |n|
-# tINTEGER . tIDENTIFIER keyword_do | tIDENTIFIER | 
-```
-
-**Parse:** *using Bison (yet-another-compiler-compiler) parses tokens into statements called abstract syntax tree nodes (also includes a meta-data: line numbers, compiler intermediates) ->(AST nodes)*
-
-*Actually Bison doesn't process tokens, it just creates a parsing code file `/parse.c` from a rules file `/parse.y` during the build process.*
-
-*And after that using Grammar Rules described in `parse.c` we convert tokens into a complex internal data structure called AST.*
-
-```Ruby
-Program # 10.times { |n| puts n }
-   |
- method
-:add_block
-   |
-  call
-  ---------------------
-   |        |         |
-integer    period  identifier
-  10        .        times
-```
-
-**Compile:** *compiles AST nodes into low-level instructions->
-YARV(yet-another-ruby-vm) Instructions*
-
-```ruby
-2+2
-# [AST Node]                                [YARV]
-# NODE_SCOPE (table: [none], args: [none]) | putself
-# |--NODE_FCALL (method id: puts)          | <callinfo mid:puts
-#     |--NODE_CALL (method id: +)          | <callinfo mid:+
-#         |--NODE_LIT 2                    | putobject 2
-#         |--NODE_LIT 2                    | putobject 2
-```
-
-**[Low-level] What is method dispatch?**
-
-*In case of languages with a single inheritance (like Ruby), method dispatch is the way language looks for the method definition. If the method is defined on that class, that method is invoked. Else the language will lookup for this definition through class ancestors up to the unique supercall.*
-
-```ruby
-# read from the bottom
-BasicObject # or finally here
-|
-Kernel # or here
-|
-Object # if was not overwrited, will check here
-  |
-  |----ExampleClass #lookup if method was overwrited
-
-```
 
 ***
 
 ### Practical questions
-
-**method_missing: what is it?**
-
-Метод класса `BasicObject`, который работает как begin/rescue для вызовов методов и перехватывает несуществующие. Принимает 3 аргумента: название метода, массив аргументов и блок.
-
-Так же в случае патчинга `method_missing` нужно не забывать патчить `respond_to_missing?` - иначе может возникнуть ситуация, когда метод отсутствующий метод обрабатывается, но библиотеки использующие `respond_to_missing?` будут продолжать воспринимать его как отсутствующий.
-
 
 **delete_all vs destroy_all**
 
@@ -303,13 +236,32 @@ Nginx - веб-сервер. Puma или Unicorn - application-сервер.
 **Как работает loadbalancer**
 
 
-### Metaprogramming
+### <a id="metaprogramming"></a> Metaprogramming
 
-**Kernel.eval, .class_eval – code generators**
+#### What do you know about code generators? Kernel.eval, class_eval, instance_eval
 
-**What is Ruby's :method_missing?**
+`eval` is ideal for adding methods to a class dynamically. This functionality becomes very useful when we need to create gems.
+For instance, `attr_accessor` is the most famous example of code generation:
 
-:method_missing is defined in `BasicObject`. It allows us to:
+```ruby
+def attr_accessor(accessor_name)
+  self.class_eval %{
+    def #{accessor_name}
+      @#{accessor_name}
+    end
+    def #{accessor_name}=(value)
+      @#{accessor_name} = value
+    end
+  }
+end
+```
+
+
+#### What is Ruby's :method_missing?
+
+:method_missing is defined in `BasicObject`.
+
+It allows us to:
   1. Handle errors
   2. Delegate methods
   3. Build DSLs
@@ -361,6 +313,74 @@ num.respond_to?(:add_value) # => true
 
 
 **Third**. It allows us to create DSLs (*domain-specific language*). Check any of the most popular gems: Rack, XML, Rails Routing, Sinatra, factory_bot, interactors. In all of them you would be able to find some footprints of `method_missing` and other metaprogramming tweaks.
+
+### <a id="concurrency-and-parallelism"></a> Concurrency and Parallelism
+
+### <a id="ancient-magic"></a> Ancient Magic (Ruby under a Microscope)
+
+
+#### How many times Ruby reads & updates the code before running?
+
+* God, save "Metaprogramming Ruby"
+
+Shortly: *3 times.*
+
+*Ruby code ->*
+
+**Tokenize:** *reads the text chars and converts them into tokens ->(tokens)*
+
+```ruby
+10.times do |n|
+# tINTEGER . tIDENTIFIER keyword_do | tIDENTIFIER | 
+```
+
+**Parse:** *using Bison (yet-another-compiler-compiler) parses tokens into statements called abstract syntax tree nodes (also includes a meta-data: line numbers, compiler intermediates) ->(AST nodes)*
+
+*Actually Bison doesn't process tokens, it just creates a parsing code file `/parse.c` from a rules file `/parse.y` during the build process.*
+
+*And after that using Grammar Rules described in `parse.c` we convert tokens into a complex internal data structure called AST.*
+
+```Ruby
+Program # 10.times { |n| puts n }
+   |
+ method
+:add_block
+   |
+  call
+  ---------------------
+   |        |         |
+integer    period  identifier
+  10        .        times
+```
+
+**Compile:** *compiles AST nodes into low-level instructions->
+YARV(yet-another-ruby-vm) Instructions*
+
+```ruby
+2+2
+# [AST Node]                                [YARV]
+# NODE_SCOPE (table: [none], args: [none]) | putself
+# |--NODE_FCALL (method id: puts)          | <callinfo mid:puts
+#     |--NODE_CALL (method id: +)          | <callinfo mid:+
+#         |--NODE_LIT 2                    | putobject 2
+#         |--NODE_LIT 2                    | putobject 2
+```
+
+**[Low-level] What is method dispatch?**
+
+*In case of languages with a single inheritance (like Ruby), method dispatch is the way language looks for the method definition. If the method is defined on that class, that method is invoked. Else the language will lookup for this definition through class ancestors up to the unique supercall.*
+
+```ruby
+# read from the bottom
+BasicObject # or finally here
+|
+Kernel # or here
+|
+Object # if was not overwrited, will check here
+  |
+  |----ExampleClass #lookup if method was overwrited
+
+```
 
 ## Patterns
 
