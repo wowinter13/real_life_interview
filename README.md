@@ -14,7 +14,9 @@ This is an open source, community project, and I am grateful for all the help I 
   - [Algorithms](#algorithms)
   - [Concurrency and Parallelism](#concurrency-and-parallelism)
 - [Databases](#databases)
+  - [Common](#common-databases)
   - [Postgresql](#postgresql)
+  - [NoSQL](#nosql-databases)
 - [Ruby on Rails](#ror)
   - [Ruby](#ruby)
   - [Rails](#rails)
@@ -22,60 +24,55 @@ This is an open source, community project, and I am grateful for all the help I 
   - [Concurrency and Parallelism](#concurrency-and-parallelism)
   - [Ancient Magic](#ancient-magic)
 - [Golang](#golang)
-    - [Concurrency and Parallelism](#concurrency-and-parallelism)
+  - [Channels](#channels)
+  - [Concurrency and Parallelism](#concurrency-and-parallelism)
 - [Javascript](#javascript)
 
 ***
 
 # <a id="common"></a> Common
+### <a id="algorithms"></a> Algorithms
 
-**Threads vs Processes**
+#### 1. Reverse a linked list
+
+#### 2. Quick Sort
+
+#### 3. Bubble Sort
+
+### <a id="concurrency-and-parallelism"></a> Concurrency and Parallelism
+
+#### 1. Threads vs Processes
 
 <img width="560" height="544" src="https://raw.githubusercontent.com/wowinter13/real_life_interview/master/thread-vs-process.png">
 
-**Data races**
+#### 2. Data races
 
 A data race is a situation that occurs when multiple threads are running the same program and 2 or more threads get access to the same shared variable, at the same time. Cases like this can be prevented using locks, so the access to the variable will be locked until one of the threads completes its operation.
 
-**Deadlocks**
+#### 3. Deadlocks
 
 This is a situation where two or more threads are blocked permamently because they are waiting for each other.
-
-
-**Why gRPC is better than our lovely REST? Why gRPC is a perfect choice for microservices? Do you know any useful features?**
-
-gRPC is a perfect choice for microservices simply because of being lightweight and fast. Talking about the advantages:
-1. Metadata. Instead of using HTTP requests. Metadata is much simplier and perfectly fits for internal communication.
-2. Streaming (thanks to HTTP 2.0). gRPC provides all streaming types (client, server, bidirectional).
-3. Interceptors. The way gRPC allows you to modify and change requests/responses right out of the box. (read: middlewares)
-4. Load Balancing.
-5. Call Cancellation. You can simply kill a gRPC call if you don't need a response anymore.
 
 ***
 
 # <a id="databases"></a> Databases
+
+### <a id="common-databases"></a> Common
+
 ### <a id="postgresql"></a> Postgresql
 
-#### Do you know what is PGQ? Other queues in Postgres?
+#### 1. Do you know what is PGQ? Other queues in Postgres?
+
+
+### <a id="nosql-databases"></a> NoSQL
+
+#### 1. What are types of NoSQL databases?
+
 
 ***
 
 # <a id="ror"></a> Ruby on Rails
 ### DB Questions
-
-**What is AREL?**
-
-Shortly: *A REL*ational algebra
-
-Fully:
-
-Arel is a Relational Algebra for Ruby. It simplifies the generation complex of SQL queries.
-
-Now is bundled inside Rails Active Record.
-
-Being used in constructing SQL queries. Every time you pass a hash to where, it goes through Arel eventually. Rails exposes this with a public API that we can hook into when we need to build a more complex query.
-
-It’s all about providing frameworks with a way of building and representing SQL queries. It’s not the kind of library you would typically want to use directly (although you could as shown in a minute). Arel is meant to be the basic building block upon which frameworks build their own APIs that are more suitable for the end user.
 
 **What is N+1 query?**
 
@@ -442,6 +439,20 @@ Object # if was not overwrited, will check here
 
 # <a id="golang"></a> Golang
 
+### <a id="channels"></a> Channels
+
+#### 1. What are channels used for?
+
+#### 2. Buffered and Unbuffered channels. What are they good for?
+
+#### 3. What happens if you write to closed channel? And what if you read from it?
+
+
+
+### <a id="concurrency-and-parallelism"></a> Concurrency and Parallelism
+
+#### 1. Mutex & RWMutex. What is the difference between them?
+
 
 ***
 # <a id="javascript"></a> Javascript
@@ -451,3 +462,17 @@ Object # if was not overwrited, will check here
 #### How does OOP implemented in vanilla JS?
 
 #### In cookie-based session management, who sets the session token?
+
+
+
+
+
+// to sort
+#### Why gRPC is better than our lovely REST? Why gRPC is a perfect choice for microservices? Do you know any useful features?
+
+gRPC is a perfect choice for microservices simply because of being lightweight and fast. Talking about the advantages:
+1. Metadata. Instead of using HTTP requests. Metadata is much simplier and perfectly fits for internal communication.
+2. Streaming (thanks to HTTP 2.0). gRPC provides all streaming types (client, server, bidirectional).
+3. Interceptors. The way gRPC allows you to modify and change requests/responses right out of the box. (read: middlewares)
+4. Load Balancing.
+5. Call Cancellation. You can simply kill a gRPC call if you don't need a response anymore.
