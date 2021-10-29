@@ -21,7 +21,7 @@ This is an open source, community project, and I am grateful for all the help I 
   - [Ruby](#ruby)
   - [Rails](#rails)
   - [Metaprogramming](#metaprogramming)
-  - [Concurrency and Parallelism](#concurrency-and-parallelism)
+  - [Concurrency and Parallelism](#rb-concurrency-and-parallelism)
   - [Ancient Magic](#ancient-magic)
 - [Golang](#golang)
   - [Channels](#channels)
@@ -64,6 +64,14 @@ This is a situation where two or more threads are blocked permamently because th
 #### 1. Do you know what is PGQ? Other queues in Postgres?
 
 
+#### 2. Postgres. Indexes.
+
+По типам индексов, их там в PG штук 5, но я лично сталкивался в миграциях только с btree и ginом.
+btree это дефолтный индекс – balanced дерево. Получается работает как придавленное нормальное распределение, то есть, у нас очень ветвистое дерево, весь кайф в балансе, то есть глубина на всех участках одинаковая. Собственно по понятным причинам подходит для сортируемых данных.
+gin - это базовый обратный индекc, там концепция обратная – мы храним не значения по индексам, а индексы по значениям. 
+Еще там есть Brin, как Сергей Брин, но индекс, Gist, хеш-индексы, но детали не изучал ибо не использовал осознанно.
+
+
 ### <a id="nosql-databases"></a> NoSQL
 
 #### 1. What are types of NoSQL databases?
@@ -72,6 +80,15 @@ This is a situation where two or more threads are blocked permamently because th
 ***
 
 # <a id="ror"></a> Ruby on Rails
+
+### <a id="ruby"></a> Ruby
+
+#### Memory Allocation. For instance, on arrays. Why does it works efficiently while Ruby is dynamically typed?
+
+Ruby allocates memory for an array, but it does not take into account the final string length. And when we add new data, then the entire memory object is transferred. Ruby allocates a cell with a larger size and trasfers the entire array to this cell. How to solve the memory allocation problem? Well, in fact, it is enough to set the initial length of the array.
+
+Why does it works efficiently? Thanks to the mechanism of special links called pointers. We only store references to the object.
+
 ### DB Questions
 
 **What is N+1 query?**
@@ -143,17 +160,22 @@ The main problem is a reduced performance.
 **3 принципа ООП:**
 
 
-**Как инкапсуляция работает в Ruby**
+**How incapsulation works in Ruby?**
 
 **5 principles SOLID:**
 
 *SOLID is an acronym for 5 basic OOP principles based on making the code more understandable, flexible and maintainable.*
 
-- S(ingle resposibility)
-- O(pen-closed)
-- L(iskov substitution)
-- I(nterface segregation)
-- D(ependency inversion)
+- **S(ingle resposibility)**
+  One class should have only one responsibility.
+- **O(pen-closed)**
+  Class should be open for extension, but closed for modification.
+- **L(iskov substitution)**
+  All subtype class instances should not break the behavior of the original ancestor class, so they can be substituted.
+- **I(nterface segregation)**
+  Many interfaces of special usage (client-specific) are better than one universal and abstract interface.
+- **D(ependency inversion)**
+  Abstractions should not depend on details. Details should depend on abstractions.
 
 **Cвязность и что это означает**
 
@@ -311,7 +333,13 @@ num.respond_to?(:add_value) # => true
 
 **Third**. It allows us to create DSLs (*domain-specific language*). Check any of the most popular gems: Rack, XML, Rails Routing, Sinatra, factory_bot, interactors. In all of them you would be able to find some footprints of `method_missing` and other metaprogramming tweaks.
 
-### <a id="concurrency-and-parallelism"></a> Concurrency and Parallelism
+### <a id="rb-concurrency-and-parallelism"></a> Concurrency and Parallelism
+
+#### GIL. Threads.
+
+GIL (global interpretation lock) is a thread synchronization mechanism used in Ruby that helps to avoid data conflicts when more than 1 thread is accessing the same area of memory.
+
+And threads are used to parellelize computations. Threads are placed in a special context and can share the same memory.
 
 ### <a id="ancient-magic"></a> Ancient Magic (Ruby under a Microscope)
 
@@ -378,6 +406,11 @@ Object # if was not overwrited, will check here
   |----ExampleClass #lookup if method was overwrited
 
 ```
+
+
+**Ruby Garbage Collector**
+GC collects all unused objects and frees memory of them. Basically, GC will delete object, if there are no more calls to it in the program.
+
 
 ## Patterns
 
