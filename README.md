@@ -59,6 +59,24 @@ This is a situation where two or more threads are blocked permamently because th
 
 ### <a id="common-databases"></a> Common
 
+
+**Types of indexes**
+
+1. Hash-indexes (key-value)
+
+Used for columns containing unique data. 
+
+A hash index stores keys by dividing them into smaller buckets, where each bucket is given an integer ID-number to retrieve it quickly when searching for a key’s location in the hash table. The buckets are stored sequentially on a disk. Fast read, cheap storage. But it is impossible to store duplicate keys within a bucket.
+
+2. LSM-tree (Log-Structured Merge-Tree)
+
+3. B-trees (balanced tree)
+
+The most popular index type.
+
+Balanced tree is balanced because compared to hash or log-strucured indexes, B-trees always split keys by dividing them into chunks (page) with a fixed size (about 4Kb). Each page has a pointer (link) on the disk, and can be a reference to another one page. The links count for child elements called is called branching factor (for the sake of simplicity, depth).
+
+
 ### <a id="postgresql"></a> Postgresql
 
 #### 1. Do you know what is PGQ? Other queues in Postgres?
@@ -75,6 +93,8 @@ gin - это базовый обратный индекc, там концепц�
 ### <a id="nosql-databases"></a> NoSQL
 
 #### 1. What are types of NoSQL databases?
+
+graph stores, key-value stores, document stores, column stores.
 
 
 ***
@@ -121,6 +141,8 @@ The main problem is a reduced performance.
 Если более точно, то существует 4 уровня изоляции данных. По дефолту в PG используется `read commited`, который читает записи закомиченные до исполнения запроса. Транзакция позволяет исполнять запрос в рамках одного соединения и получать корректные данные на выходе.
 
 **Что такое индекс, когда добавляют в базу и зачем они нужны**
+
+Индекс — дополнительная структура, производная от основных данных.
 
 Индекс это обмен памяти на скорость, и базе данных вместо того чтобы использовать полнотекстный поиск достаточно пройтись по индексу, это будет значительно быстрее.
 
