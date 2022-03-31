@@ -28,6 +28,7 @@ This is an open source, community project, and I am grateful for all the help I 
   - [Channels](#channels)
   - [Concurrency and Parallelism](#concurrency-and-parallelism)
 - [Javascript](#javascript)
+- [Network & DevOps](#network)
 
 ***
 
@@ -98,6 +99,10 @@ This is a situation where two or more threads are blocked permamently because th
 
 **В случае postgresql часто используется связка partman/pg_cron для автоматического партицирования данных в какой-то период. (PARTITION BY)**
 
+3. Как достигается консенсус в распределенных системах?
+
+Используется алгоритм двухфазной фиксации (**2PC, two phase commit**). Этот алгоритм гарантирует, что все узлы либо зафиксировали транзакцию, либо прервали ее. Для этого используется диспетчер транзакций. 
+
 
 
 # <a id="databases"></a> Databases
@@ -132,6 +137,24 @@ ACID – atomacity, consistency, isolation, durability (атомарность,
 **I**solation – гарантирует, что конкурентные операции изолированы друг от друга. 
 
 **D**urability – гарантирует, что данные не будут потеряны после успешно зафиксированных операций даже в случае сбоя самой БД.
+
+**CAP теорема**
+
+CAP – consistency, availability, partition tolerance (2/3).
+
+**C**onsistency – согласованность.
+
+**A**vailability – доступность.
+
+**P**artition tolerance – устойчивость к нарушениям связности.
+
+Теорема вызывает большего вопросов, чем ответов, тк даже самые современные и устойчивые системы не могут гарантировать соответствие условиям теоремы.
+
+Говоря про согласованность, она нарушается уже при использовании многоядерных процессоров, если поток на одном ядре пишет в ячейку, а поток на другом читает – без использования барьеров памяти ошибка может возникнуть уже на таком уровне.
+
+Доступность может быть "гарантирована" с помощью использования систем репликации и партиционирования, но при этом увеличивая вероятность нарушений связности.
+
+
 
 ### <a id="postgresql"></a> Postgresql
 
@@ -588,3 +611,12 @@ gRPC is a perfect choice for microservices simply because of being lightweight a
 3. Interceptors. The way gRPC allows you to modify and change requests/responses right out of the box. (read: middlewares)
 4. Load Balancing.
 5. Call Cancellation. You can simply kill a gRPC call if you don't need a response anymore.
+
+
+# <a id="network"></a> Network & DevOps
+
+#### 1. TCP vs UDP
+
+TCP считает пакет потерянным после отсутствия ответа по истечении некоторого времени ожидания и автоматически повторяет пересылку потерянных пакетов.
+
+UDP имеет смысл выбирать в случаях, когда запоздавшие данные теряют всякую ценность.
