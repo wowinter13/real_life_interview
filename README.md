@@ -10,26 +10,14 @@ This is an open source, community project, and I am grateful for all the help I 
 ***
 
 # Table of Content
-- [Common](#common)
-  - [Algorithms](#algorithms)
-  - [Concurrency and Parallelism](#concurrency-and-parallelism)
-  - [System Design](#system-design)
-- [Databases](#databases)
-  - [Common](#common-databases)
-  - [Postgresql](#postgresql)
-  - [NoSQL](#nosql-databases)
-- [Ruby on Rails](ruby.md)
-  - [Ruby](#ruby)
-  - [Rails](#rails)
-  - [Metaprogramming](#metaprogramming)
-  - [Concurrency and Parallelism](#rb-concurrency-and-parallelism)
-  - [Ancient Magic](#ancient-magic)
+- [Computer Science](cs.md)
+- [Databases](db.md)
+  - [DB Assessments](sql_assessments.md)
+- [Architecture/Systems Design](arch.md)
+- [Ruby & Rails](ruby.md)
+  - [Ruby Assessments](ruby_assessments.md)
 - [Golang](golang.md)
-  - [Channels](#channels)
-  - [Concurrency and Parallelism](#concurrency-and-parallelism)
-- [Javascript](#javascript)
-- [Network & DevOps](#network)
-
+  - [Go Assessments](go_assessments.md)
 ***
 
 # <a id="common"></a> Common

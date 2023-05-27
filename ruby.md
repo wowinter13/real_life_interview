@@ -13,9 +13,13 @@
 
 ### <a id="base"></a> Base
 
-**What is the difference between :include and :extend in Ruby?**
+**What is the difference between :include, :extend and :prepend in Ruby?**
 
-:include is being used for instance methods (i for I) and :extend for class methods.
+`include` is being used for instance methods.
+
+`extend` – for class methods. Going above the class in a method dispatch tree. (Class -> Extend -> ... -> Kernel -> BasicObject)
+
+`prepend` – for class methods. Going below the class in a method dispatch tree. (Prepend -> Class -> ... -> Kernel -> BasicObject)
 
 ***
 
@@ -23,9 +27,12 @@
 
 **Memory Allocation. For instance, on arrays. Why does it works efficiently while Ruby is dynamically typed?**
 
-Ruby allocates memory for an array, but it does not take into account the final string length. And when we add new data, then the entire memory object is transferred. Ruby allocates a cell with a larger size and trasfers the entire array to this cell. How to solve the memory allocation problem? Well, in fact, it is enough to set the initial length of the array.
+Ruby allocates memory for an array, but it does not take into account the final string length. And when we add new data, then the entire memory object is transferred. Ruby allocates a cell with a larger size and trasfers the entire array to this cell.
+**How to solve the memory allocation problem?**
+Well, in fact, it is enough to set the initial length of the array.
 
-Why does it works efficiently? Thanks to the mechanism of special links called pointers. We only store references to the object.
+**Why does it works efficiently?**
+Thanks to the mechanism of special links called pointers. We only store references to the object.
 
 
 **Ruby data types**
