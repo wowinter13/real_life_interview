@@ -1,15 +1,13 @@
 ## Ruby
 
-***
-
 ### Table of Content
   - [Base](#base)
   - [Algos and Data Structures](#algos-and-data-structures)
   - [Rails specific questions](#rails-specific)
   - [Concurrency and Parallelism](#rb-concurrency-and-parallelism)
+  - [Network](#network)
   - [Deep theory](#deep-theory)
 
-***
 
 ### <a id="base"></a> Base
 
@@ -19,7 +17,7 @@
 
 `extend` – for class methods. Going above the class in a method dispatch tree. (Class -> Extend -> ... -> Kernel -> BasicObject)
 
-`prepend` – for class methods. Going below the class in a method dispatch tree. (Prepend -> Class -> ... -> Kernel -> BasicObject)
+`prepend` – Going below the class in a method dispatch tree. (Prepend -> Class -> ... -> Kernel -> BasicObject)
 
 ***
 
@@ -64,6 +62,52 @@ Thanks to the mechanism of special links called pointers. We only store referenc
 ***
 
 ### <a id="rb-concurrency-and-parallelism"></a> Concurrency and Parallelism
+
+
+### <a id="network"></a> Network
+
+**What is Rack**
+
+Rack is a fundamental part of Ruby web server interfacing. Simply saying, just an interface for middlewares between the web-app and Rails app.
+
+Rack supports middleware, which are modules that sit between the web server and the application, processing requests and responses. Examples: request cleaning, response compression, logging, header modification, and etc.
+
+```ruby
+# app.rb
+config.middleware.use CustomLogger
+
+# middleware.rb
+@app.call(env).some_actions
+```
+
+**Describe how the request goes from browser to Rails**
+
+1. **Client sends a request**
+  This request includes the HTTP method, the URL, headers (like Accept, Content-Type, etc.), and sometimes a request body.
+
+2. **DNS Lookup**
+  The DNS is a global network of servers that map domain names to IP addresses. 
+  example.com ->(r) DNS(8.8.8.8) ->(redirect) 10.0.10.0 
+
+3. **Establishing a Connection**
+  The client and server then perform a handshake to establish a connection.
+  For HTTPS -> negotiate TLS. Certificate check.
+
+4. **Sending the Request**
+  The client sends the HTTP request over the established connection.
+
+5. **Load Balancer/Nginx layer**
+  Depends on the infrastructure. After that also could be Ingress layer.
+  (e.g. LB -> Nginx -> Ingress -> step 6)
+
+6. **Web Server Processing**
+
+7. **Middleware Processing**
+
+8. **Routing -> Controller action**
+
+9. **View rendering -> response**
+
 
 
 ***

@@ -1,7 +1,6 @@
+### Ruby assessments
 
-
-
-**Implementations of :factorial function:**
+**Implement a :factorial function:**
 
 - classic
   ```ruby
@@ -11,6 +10,7 @@
     (1..n).inject(:*)
   end
   ```
+
 - recursion
   ```ruby
   def rec_fact(n)
@@ -19,3 +19,17 @@
     return n * rec_fact(n-1)
   end
   ```
+
+**Implement :each_with_index**
+
+```ruby
+class Enumerable
+  def each_with_index
+    index = 0
+    array.each do |item|
+      yield(item, index)
+      index += 1
+    end
+  end
+end
+```

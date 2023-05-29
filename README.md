@@ -320,6 +320,16 @@ Nginx - веб-сервер. Puma или Unicorn - application-сервер.
 
 Редирект.
 
+**Static File Serving**: Nginx excels at serving static files directly. This allows you to offload serving static files (CSS, JavaScript, images, etc.) from your Ruby application server (like Puma) to Nginx, thus freeing up Puma to focus on serving dynamic content. This can lead to a more responsive application and better use of server resources.
+
+**Load Balancing:** Nginx can be used as a reverse proxy and a load balancer.
+
+**Caching**
+
+**Rate Limiting and Security**: Nginx can perform rate limiting.
+
+
+
 **Как работает loadbalancer**
 
 
