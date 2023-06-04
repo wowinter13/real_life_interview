@@ -1,3 +1,11 @@
+## Golang Assessments
+
+### Table of Content
+  - [Channels](#channels)
+	- [Algos](#algos)
+
+
+### <a id="channels"></a> Channels
 
 **Buffered channels**
 
@@ -55,3 +63,37 @@ func foo(c chan<- int, wg *sync.WaitGroup) {
 }
 
 ```
+
+
+### <a id="algos"></a> Algos
+
+Find duplicates in slice
+
+```go
+
+func countOccurrences(slice []int) map[int]int {
+	countMap := make(map[int]int)
+	for _, entry := range slice {
+		countMap[entry] += 1
+	}
+	return countMap
+}
+
+// OR
+
+func findDuplicates(slice []int) []int {
+	duplicates := []int{}
+	keys := make(map[int]bool)
+
+	for _, entry := range slice {
+		if _, value := keys[entry]; !value {
+			keys[entry] = true
+		} else {
+			duplicates = append(duplicates, entry)
+		}
+	}
+	return duplicates
+}
+
+```
+

@@ -23,25 +23,15 @@ This is an open source, community project, and I am grateful for all the help I 
 # <a id="common"></a> Common
 ### <a id="algorithms"></a> Algorithms
 
-#### 1. Reverse a linked list
-
-#### 2. Quick Sort
-
-#### 3. Bubble Sort
-
 ### <a id="concurrency-and-parallelism"></a> Concurrency and Parallelism
 
 #### 1. Threads vs Processes
 
 <img width="560" height="544" src="https://raw.githubusercontent.com/wowinter13/real_life_interview/master/thread-vs-process.png">
 
-#### 2. Data races
 
-A data race is a situation that occurs when multiple threads are running the same program and 2 or more threads get access to the same shared variable, at the same time. Cases like this can be prevented using locks, so the access to the variable will be locked until one of the threads completes its operation.
 
-#### 3. Deadlocks
 
-This is a situation where two or more threads are blocked permamently because they are waiting for each other.
 
 ***
 

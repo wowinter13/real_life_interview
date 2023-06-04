@@ -26,6 +26,7 @@
 **Memory Allocation. For instance, on arrays. Why does it works efficiently while Ruby is dynamically typed?**
 
 Ruby allocates memory for an array, but it does not take into account the final string length. And when we add new data, then the entire memory object is transferred. Ruby allocates a cell with a larger size and trasfers the entire array to this cell.
+
 **How to solve the memory allocation problem?**
 Well, in fact, it is enough to set the initial length of the array.
 
@@ -40,6 +41,12 @@ Thanks to the mechanism of special links called pointers. We only store referenc
 - String
 - Array/Hash/Range
 - Struct
+
+**Array time complexity**
+
+
+**Hash time complexity**
+
 
 
 ***
