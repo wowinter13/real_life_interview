@@ -66,6 +66,11 @@ Thanks to the mechanism of special links called pointers. We only store referenc
 
 `destroy_all` instantizes every record and deletes them in a sequence according to the query.
 
+**Rails click journey**
+
+<img src="https://raw.githubusercontent.com/wowinter13/real_life_interview/master/rails-click-journey.png">
+
+
 ***
 
 ### <a id="rb-concurrency-and-parallelism"></a> Concurrency and Parallelism
